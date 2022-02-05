@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "9b4f48af-616c-4f7c-8a52-3d34a5efcaf6",
+		"name": "LocalDev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ce-Type",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Ce-Specversion",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Ce-Source",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Ce-Id",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": {\n    \"attributes\": {\n      \"key\": \"value\"\n    },\n    \"data\": \"SGVsbG8gQ2xvdWQgUHViL1N1YiEgSGVyZSBpcyBteSBtZXNzYWdlIQ==\",\n    \"messageId\": \"136969346945\"\n  },\n  \"subscription\": \"projects/myproject/subscriptions/mysubscription\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
