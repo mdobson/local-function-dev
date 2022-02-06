@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug:func1": "node --inspect node_modules/.bin/functions-framework --target=listGoogleAPIs",
-    "debug:func2": "node --inspect node_modules/.bin/functions-framework --target=helloPubSub --signature-type=event",
+    "debug:func1": "node --inspect=5001 node_modules/.bin/functions-framework --target=listGoogleAPIs --port=8081",
+    "debug:func2": "node --inspect=5002 node_modules/.bin/functions-framework --target=genNumber --port=8082",
+    "debug:event_func": "node --inspect node_modules/.bin/functions-framework --target=helloPubSub --signature-type=event",
+    "debug:event_func_test_1": "node --inspect node_modules/.bin/functions-framework --target=publishTestTwo --signature-type=event --port=8081",
+    "debug:event_func_test_2": "node --inspect node_modules/.bin/functions-framework --target=hearTestTwo --signature-type=event --port=8082",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
@@ -15,12 +18,18 @@
     "pretest": "npm run compile",
     "posttest": "npm run lint",
     "start": "functions-framework --source=build/src/ --target=helloWorld",
-    "watch": "concurrently \"tsc -w\" \"nodemon --watch ./build/ --exec npm run start\""
+    "watch": "concurrently \"tsc -w\" \"nodemon --watch ./build/ --exec npm run start\"",
+    "server:one": "PORT=4001 node --inspect=4002 server.js",
+    "server:two": "PORT=4003 node --inspect=4004 server.js",
+    "servers": "concurrently \"npm run server:one\" \"npm run server:two\"",
+    "func_setup": "concurrently \"npm run server:one\" \"npm run debug:func1\" \"npm run debug:func2\"",
+    "evented_func_setup": "source .env && concurrently \"npm run server:one\" \"npm run debug:event_func_test_1\" \"npm run debug:event_func_test_2\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/functions-framework": "^2.1.1",
+    "@google-cloud/pubsub": "^2.18.5",
     "@types/express": "^4.17.13",
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
